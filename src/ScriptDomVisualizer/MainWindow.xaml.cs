@@ -35,14 +35,7 @@ namespace ScriptDomVisualizer
         public MainWindow()
         {
             InitializeComponent();
-
-//            InputBox.Document.Blocks.Add(new Paragraph(new Run(@"while (select count(*) from t) > 0
-//begin
-//   print 'saaa';
-//end")));
-
-           // Parse();
-
+            
             Results.SelectedItemChanged += Results_SelectedItemChanged;
         }
 
@@ -158,23 +151,15 @@ namespace ScriptDomVisualizer
             }
             var enumerator = new EnumeratorVisitor();
             script.Accept(enumerator);
-            //Results.Text = "";
             Results.Items.Clear();
 
             foreach (var node in enumerator.Nodes)
             {
-              //  var item = new TreeViewItem();
-              //  item.Header = TidyTypeName(node.GetType().FullName);
-                
-                // Console.WriteLine(node.GetType());
-                //  this.Results.Text += node.GetType() + "\r\n";
-                //this.Results.Text += "\t" + GetChildren(node);
+             
                 foreach (var i in GetChildren(node))
                 {
                     Results.Items.Add(i);
                 }
-
-                
             }
 
         }
@@ -300,7 +285,7 @@ namespace ScriptDomVisualizer
 
         private void UIElement_OnKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && Keyboard.IsKeyDown(Key.LeftCtrl))
+            if (e.Key == Key.Enter && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                 Parse();
         }
 
