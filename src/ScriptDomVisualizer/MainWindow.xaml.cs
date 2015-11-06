@@ -134,14 +134,7 @@ namespace ScriptDomVisualizer
 
         bool _userChanges = true;
 
-        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!_userChanges)
-                return;
-
-            Parse();
-        }
-
+        
         private void Parse()
         {
             Errors.Text = "";

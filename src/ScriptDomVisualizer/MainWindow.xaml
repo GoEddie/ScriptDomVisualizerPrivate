@@ -10,9 +10,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <WrapPanel Grid.Row="0">
             <Label >Type your query and then ctrl+enter to parse....</Label>
             <TextBlock Margin="10,5,0,0">           
@@ -20,9 +21,25 @@
             </TextBlock>
         </WrapPanel>
         
-        <RichTextBox Grid.Row="1" x:Name="InputBox" AcceptsReturn="true" KeyUp="UIElement_OnKeyUp" VerticalScrollBarVisibility="Auto"></RichTextBox>
-        <TextBox Grid.Row="2" x:Name="Errors" IsReadOnly="true" VerticalScrollBarVisibility="Auto"></TextBox>
-        <TreeView Grid.Row="3" x:Name="Results"></TreeView>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+            </Grid.RowDefinitions>
 
+                <RichTextBox Grid.Row="0"
+                             x:Name="InputBox" VerticalAlignment="Stretch" AcceptsReturn="true" KeyUp="UIElement_OnKeyUp" VerticalScrollBarVisibility="Auto"></RichTextBox>
+
+            <TextBox  Grid.Row="1" x:Name="Errors" IsReadOnly="true" Height="30" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"></TextBox>
+
+        </Grid>
+        
+        <GridSplitter Height="5" HorizontalAlignment="Stretch" Margin="0"
+		      VerticalAlignment="Center"
+		      ResizeDirection="Rows"
+		      ShowsPreview="True" Grid.Row="2"></GridSplitter>
+
+        <TreeView Grid.Row="3" x:Name="Results" VerticalAlignment="Stretch"></TreeView>
+        
     </Grid>
 </Window>
