@@ -144,6 +144,8 @@ namespace ScriptDomVisualizer
 
         private void Parse()
         {
+            Errors.Text = "";
+
             var parser = new TSql120Parser(true);
 
             IList<ParseError> errors;
