@@ -17,8 +17,10 @@
         <WrapPanel Grid.Row="0">
             <Label >Type your query and then ctrl+enter to parse....</Label>
             <TextBlock Margin="10,5,0,0">           
-                <!--<Hyperlink NavigateUri="mailto:ed@agilesql.co.uk" RequestNavigate="Hyperlink_RequestNavigate">ed@agilesql.co.uk</Hyperlink>-->
+                <Hyperlink NavigateUri="mailto:ed@agilesql.co.uk" RequestNavigate="Hyperlink_RequestNavigate">ed@agilesql.co.uk</Hyperlink>
             </TextBlock>
+            <Label >     Max Depth: </Label>
+            <TextBox x:Name="DepthText">7</TextBox>
         </WrapPanel>
         
         <Grid Grid.Row="1">

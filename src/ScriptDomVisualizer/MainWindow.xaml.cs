@@ -131,6 +131,7 @@ namespace ScriptDomVisualizer
         private void Parse()
         {
             Errors.Text = "";
+            MaxDepth = Int32.Parse(DepthText.Text);
 
             var parser = new TSql120Parser(true);
 
