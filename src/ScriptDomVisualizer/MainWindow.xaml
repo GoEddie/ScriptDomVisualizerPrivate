@@ -17,7 +17,7 @@
         <WrapPanel Grid.Row="0">
             <Label >Type your query and then ctrl+enter to parse....</Label>
             <TextBlock Margin="10,5,0,0">           
-                <Hyperlink NavigateUri="mailto:ed@agilesql.co.uk" RequestNavigate="Hyperlink_RequestNavigate">ed@agilesql.co.uk</Hyperlink>
+                <Hyperlink NavigateUri="mailto:ed@agilesql.co.uk" RequestNavigate="Hyperlink_RequestNavigate">ed@agilesql.co.uk</Hyperlink> 
             </TextBlock>
             <Label >     Max Depth: </Label>
             <TextBox x:Name="DepthText">7</TextBox>
@@ -40,8 +40,16 @@
 		      VerticalAlignment="Center"
 		      ResizeDirection="Rows"
 		      ShowsPreview="True" Grid.Row="2"></GridSplitter>
+        <TabControl Grid.Row="3">
+            <TabItem x:Name="TreeOutput" Header="Tree" >
+                <TreeView  x:Name="Results" VerticalAlignment="Stretch"></TreeView>
+            </TabItem>
+            <TabItem x:Name="TokenOutput" Header="Tree" >
+                <TreeView  x:Name="Tokens" VerticalAlignment="Stretch"></TreeView>
+            </TabItem>
 
-        <TreeView Grid.Row="3" x:Name="Results" VerticalAlignment="Stretch"></TreeView>
+        </TabControl>
+        
         
     </Grid>
 </Window>

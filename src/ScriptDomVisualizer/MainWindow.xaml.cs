@@ -37,6 +37,46 @@ namespace ScriptDomVisualizer
             InitializeComponent();
             
             Results.SelectedItemChanged += Results_SelectedItemChanged;
+            Tokens.SelectedItemChanged += Tokens_SelectedItemChanged;
+        }
+
+        private void Tokens_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var item = (e.NewValue as TreeViewItem);
+            if (item == null)
+                return;
+
+            var token = item.Tag as TSqlParserToken;
+
+            if (null == token)
+                return;
+
+            _userChanges = false;
+            var currentRange = InputBox.Selection;
+            currentRange.Select(currentRange.Start.DocumentStart, currentRange.Start.DocumentEnd);
+            currentRange.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
+
+            //if (token.of== -1 || fragment.FragmentLength == -1)
+            //    return;
+
+            try
+            {
+
+                currentRange = InputBox.Selection;
+
+
+                var start = GetPoint(InputBox.Document.ContentStart, token.Offset);
+                var end = GetPoint(InputBox.Document.ContentStart, token.Offset + token.Text.Length);
+                currentRange.Select(start, end);
+
+                var t = currentRange.Text;
+
+                currentRange.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Blue));
+            }
+            catch (Exception esss) { Console.WriteLine(esss); }
+            _userChanges = true;
+
+
         }
 
         private void Results_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -162,6 +202,21 @@ namespace ScriptDomVisualizer
                     Results.Items.Add(i);
                 }
             }
+
+            Tokens.Items.Clear();
+            var newItem = new TreeViewItem();
+            newItem.Header = "Tokens";
+            newItem.IsExpanded = true;
+
+            foreach (var t in script.ScriptTokenStream)
+            {
+                var newChild = new TreeViewItem();
+                newChild.Header = string.Format("{0} : {1} : {2} : {3}", t.TokenType, t.Text, t.Offset, t.Column);
+                newItem.Items.Add(newChild);
+                newChild.Tag = t;
+            }
+
+            Tokens.Items.Add(newItem);
 
         }
 
